@@ -10,8 +10,17 @@ import { ALBUMS } from "../mock-albums";
 export class AlbumsComponent {
   titlePage: string = "Page princiaple Albums Music";
   albums: Album[] = ALBUMS;
+  selectedAlbum!: Album; // je suis sur qu'une valeur sera passé au moment opportun
+  status: string | null = null;
+
+  constructor() {}
 
   onSelect(album: Album) {
-    console.log(album);
+    // console.log(album);
+    this.selectedAlbum = album;
+  }
+
+  playParent($event: Album) {
+    this.status = $event.id;
   }
 }
