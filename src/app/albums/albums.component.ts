@@ -1,5 +1,6 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Album } from "../album";
+import { AlbumService } from "../album.service";
 import { ALBUMS } from "../mock-albums";
 
 @Component({
@@ -7,13 +8,21 @@ import { ALBUMS } from "../mock-albums";
   templateUrl: './albums.component.html',
   styleUrls: ['./albums.component.css'],
 })
-export class AlbumsComponent {
+export class AlbumsComponent implements OnInit {
   titlePage: string = "Page princiaple Albums Music";
-  albums: Album[] = ALBUMS;
+  albums: Album[] = [];
   selectedAlbum!: Album; // je suis sur qu'une valeur sera passé au moment opportun
   status: string | null = null;
 
-  constructor() {}
+  constructor(
+    private albumService: AlbumService
+  ) {
+    console.log(`${this.albumService.count()} albums trouvés`);
+  }
+
+  ngOnInit(): void {
+    this.albums = this.albumService.getAlbums();
+  }
 
   onSelect(album: Album) {
     // console.log(album);

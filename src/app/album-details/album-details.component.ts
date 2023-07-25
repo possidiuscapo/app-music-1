@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Album, List } from '../album';
+import { AlbumService } from '../album.service';
 import { ALBUM_LISTS } from '../mock-albums';
 
 @Component({
@@ -12,8 +13,12 @@ export class AlbumDetailsComponent implements OnInit, OnChanges {
   @Input() album!: Album; // propriété liée qui sera passée par le parent
   @Output() onPlay: EventEmitter<Album> = new EventEmitter();
 
-  albumLists: List[] = ALBUM_LISTS;
+  albumLists: List[] = [];
   songs: string[] | undefined = []; // tableau qui stock la liste des chansons de l'album
+
+  constructor(
+    private albumService: AlbumService
+  ) { }
 
   ngOnInit(): void {
   }
@@ -21,8 +26,7 @@ export class AlbumDetailsComponent implements OnInit, OnChanges {
   // quand il y a du nouveau
   ngOnChanges(): void {
     if (this.album) {
-      this.songs = this.albumLists.find(elem => elem.id === this.album.id)?.list;
-      console.log(this.songs);
+      this.songs = this.albumService.getAlbumList(this.album.id);
     }
 
   }
