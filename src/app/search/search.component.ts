@@ -9,6 +9,8 @@ import { AlbumService } from '../album.service';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
+  word: string = '';
+
   @Output() searchAlbums: EventEmitter<Album[]> = new EventEmitter(); // émetteur d'évenement
   constructor(
     private albumService: AlbumService
@@ -16,6 +18,11 @@ export class SearchComponent {
 
   onSubmit(form: NgForm) {
     const results: Album[] = this.albumService.search(form.value.word);
+    this.searchAlbums.emit(results);
+  }
+
+  onChangeEmit($event: string) {
+    const results: Album[] = this.albumService.search($event);
     this.searchAlbums.emit(results);
   }
 }
