@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Album } from '../album';
+import { AlbumService } from '../album.service';
 
 @Component({
   selector: 'app-search',
@@ -7,9 +9,13 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent {
+  @Output() searchAlbums: EventEmitter<Album[]> = new EventEmitter(); // émetteur d'évenement
+  constructor(
+    private albumService: AlbumService
+  ) {}
 
   onSubmit(form: NgForm) {
-    console.log(form.value.word);
-    // console.log(form.value['word']);
+    const results: Album[] = this.albumService.search(form.value.word);
+    this.searchAlbums.emit(results);
   }
 }

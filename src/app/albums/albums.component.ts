@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Album } from "../album";
 import { AlbumService } from "../album.service";
-import { ALBUMS } from "../mock-albums";
 
 @Component({
   selector: 'app-albums',
@@ -35,4 +34,11 @@ export class AlbumsComponent implements OnInit {
   playParent($event: Album) {
     this.status = $event.id;
   }
+
+  search($event: Album[]) {
+    if ($event) {
+      this.albums = $event;
+    }
+  }
+
 }

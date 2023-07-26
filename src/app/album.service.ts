@@ -60,4 +60,18 @@ export class AlbumService {
   paginate(start: number, end: number): Album[] {
     return this.getAlbums().slice(start, end);
   }
+
+  search(word: string): Album[] {
+    return this._albums
+      .filter(album => {
+        return album.title
+          .toLowerCase()
+          .includes(word.trim().toLowerCase());
+      });
+  }
+
+  searchV2(word: string): Album[] {
+    let re = new RegExp(word.trim(), "g");
+    return this._albums.filter(album => album.title.match(re));
+  }
 }
