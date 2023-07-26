@@ -21,7 +21,10 @@ export class AlbumsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.albums = this.albumService.paginate(0, this.albumService.count());
+    this.albums = this.albumService
+              .order((a: Album, b: Album) => a.duration - b.duration) // ordonne les albums
+              .limit(0, this.albumService.count()) // renvoyer une sous-partie
+              .getAlbums(); // recupère les albums
   }
 
   onSelect(album: Album) {
