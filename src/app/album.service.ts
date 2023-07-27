@@ -74,4 +74,12 @@ export class AlbumService {
     let re = new RegExp(word.trim(), "g");
     return this._albums.filter(album => album.title.match(re));
   }
+
+  shuffle(songs: string[]) {
+    for (let i = songs.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [songs[i], songs[j]] = [songs[j], songs[i]];
+    }
+    return songs;
+  }
 }

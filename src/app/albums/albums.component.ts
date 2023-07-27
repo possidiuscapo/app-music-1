@@ -1,16 +1,18 @@
 import { Component, OnInit } from "@angular/core";
 import { Album } from "../album";
 import { AlbumService } from "../album.service";
+import { fadeInAnimation } from "../animation.module";
 
 @Component({
   selector: 'app-albums',
   templateUrl: './albums.component.html',
   styleUrls: ['./albums.component.css'],
+  animations: [fadeInAnimation]
 })
 export class AlbumsComponent implements OnInit {
   titlePage: string = "Page princiaple Albums Music";
   albums: Album[] = [];
-  selectedAlbum!: Album; // je suis sur qu'une valeur sera passé au moment opportun
+  selectedAlbum: Album| undefined; // je suis sur qu'une valeur sera passé au moment opportun
   status: string | null = null;
 
   constructor(
@@ -41,4 +43,7 @@ export class AlbumsComponent implements OnInit {
     }
   }
 
+  resetSelectedAlbum() {
+    this.selectedAlbum = undefined;
+  }
 }

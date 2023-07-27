@@ -1,17 +1,19 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { Album, List } from '../album';
 import { AlbumService } from '../album.service';
-import { ALBUM_LISTS } from '../mock-albums';
+import { fadeInAnimation } from '../animation.module';
 
 @Component({
   selector: 'app-album-details',
   templateUrl: './album-details.component.html',
-  styleUrls: ['./album-details.component.css']
+  styleUrls: ['./album-details.component.css'],
+  animations: [fadeInAnimation]
 })
 // à chaque "hook" son interface
 export class AlbumDetailsComponent implements OnInit, OnChanges {
-  @Input() album!: Album; // propriété liée qui sera passée par le parent
+  @Input() album: Album | undefined; // propriété liée qui sera passée par le parent
   @Output() onPlay: EventEmitter<Album> = new EventEmitter();
+  @Output() onHide: EventEmitter<Album> = new EventEmitter();
 
   albumLists: List[] = [];
   songs: string[] | undefined = []; // tableau qui stock la liste des chansons de l'album
@@ -31,9 +33,16 @@ export class AlbumDetailsComponent implements OnInit, OnChanges {
 
   }
 
-  play(album: Album) {
+  play(songs: Album) {
     // emettre un album vers le parent
-    this.onPlay.emit(album);
+    this.onPlay.emit(songs);
   }
 
+  shuffleAlbum(songs: string[]) {
+    this.songs = this.albumService.shuffle(songs);
+  }
+
+  hide(album: Album) {
+    this.onHide.emit(album);
+  }
 }

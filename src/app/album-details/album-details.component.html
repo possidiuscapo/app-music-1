@@ -4,11 +4,13 @@
     <h5 class="card-title">{{ album.title }}</h5>
     <p class="cart-text">Name: {{ album.name}}</p>
     <button (click)="play(album)" class="btn btn-primary">Play &gt;&gt;</button>
+    <button (click)="hide(album)" class="btn btn-warning ms-2">Hide</button>
   </div>
   <!-- Si nous avons des sons dans la playlist -->
   <!-- <div *ngIf="condition; then ...; else ...." -->
-  <div *ngIf="songs; then ifBlock; else elseBlock"></div>
-  <ng-template #ifBlock>
+    <button *ngIf="songs" (click)="shuffleAlbum(songs)" class="btn btn-success">Aléatoire</button>
+    <div *ngIf="songs; then ifBlock; else elseBlock"></div>
+    <ng-template #ifBlock>
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let song of songs">
         {{song}}
