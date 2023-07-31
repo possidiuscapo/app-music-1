@@ -22,10 +22,10 @@ export class AlbumsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.albums = this.albumService
-              .order((a: Album, b: Album) => a.duration - b.duration) // ordonne les albums
-              .limit(0, this.albumService.count()) // renvoyer une sous-partie
-              .getAlbums(); // recupère les albums
+    this.albums = this.albumService.paginate(0, this.albumService.paginateNumberPage());
+              // .order((a: Album, b: Album) => a.duration - b.duration) // ordonne les albums
+              // .limit(0, this.albumService.paginateNumberPage()) // renvoyer une sous-partie
+              // .getAlbums(); // recupère les albums
   }
 
   onSelect(album: Album) {
@@ -45,5 +45,10 @@ export class AlbumsComponent implements OnInit {
 
   resetSelectedAlbum() {
     this.selectedAlbum = undefined;
+  }
+
+  onSetPaginate($event: {start: number, end: number}) {
+    // Récupérer les albums compris entre [start et end]
+    this.albums = this.albumService.paginate($event.start, $event.end);
   }
 }

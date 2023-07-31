@@ -14,7 +14,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { AlbumDescriptionComponent } from './album-description/album-description.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { OpenCloseComponent } from './open-close/open-close.component';
+import { PaginateComponent } from './paginate/paginate.component';
 
 /**
  * L'ensemble des routes de notre application
@@ -24,7 +24,6 @@ const albumsRoutes: Routes = [
   {path: 'albums', component: AlbumsComponent},
   {path: 'login', component: LoginComponent},
   {path: 'album/:albumId', component: AlbumDescriptionComponent},
-  {path: 'oc', component: OpenCloseComponent},
 
   /*========= ATTENTION DANGER ==========*/
   {path: '**', component: PageNotFoundComponent},
@@ -39,7 +38,7 @@ const albumsRoutes: Routes = [
     LoginComponent,
     AlbumDescriptionComponent,
     PageNotFoundComponent,
-    OpenCloseComponent,
+    PaginateComponent
   ],
   imports: [
     BrowserModule,
