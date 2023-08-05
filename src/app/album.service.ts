@@ -115,13 +115,21 @@ export class AlbumService {
    * Méthode mettant le status d'un album à "on"
    */
   switchOn(album: Album) {
-    album.status = "on";
+    this._albums.forEach((a: Album) => {
+      if (a.ref === album.ref) {
+        album.status = 'on';
+      } else {
+        album.status = 'off';
+      }
+    });
     this.subjectAlbum.next(album);
   }
   /**
    * Méthode mettant le status d'un album à "off"
    */
   switchOff(album: Album) {
-    album.status = "off";
+    this._albums.forEach((a: Album) => {
+      a.status = "off";
+    });
   }
 }
