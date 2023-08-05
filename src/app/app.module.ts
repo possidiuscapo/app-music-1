@@ -15,6 +15,7 @@ import { LoginComponent } from './login/login.component';
 import { AlbumDescriptionComponent } from './album-description/album-description.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PaginateComponent } from './paginate/paginate.component';
+import { AudioPlayerComponent } from './audio-player/audio-player.component';
 
 /**
  * L'ensemble des routes de notre application
@@ -38,7 +39,8 @@ const albumsRoutes: Routes = [
     LoginComponent,
     AlbumDescriptionComponent,
     PageNotFoundComponent,
-    PaginateComponent
+    PaginateComponent,
+    AudioPlayerComponent
   ],
   imports: [
     BrowserModule,

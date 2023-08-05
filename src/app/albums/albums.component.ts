@@ -33,8 +33,11 @@ export class AlbumsComponent implements OnInit {
     this.selectedAlbum = album;
   }
 
-  playParent($event: Album) {
-    this.status = $event.id;
+  playParent(event: Album) {
+    this.status = event.id;
+    console.log(event);
+    // appelle de la méthode switchOn
+    this.albumService.switchOn(event);
   }
 
   search($event: Album[]) {

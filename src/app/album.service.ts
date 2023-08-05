@@ -11,6 +11,11 @@ export class AlbumService {
 
   private _albums: Album[] = ALBUMS; // _ convention private & protected
   private _albumList: List[] = ALBUM_LISTS;
+  private _subjectAlbum = new Subject<Album>();
+
+  public get subjectAlbum() {
+    return this._subjectAlbum;
+  }
 
   // Observable qui notifie aux abonné la page actuelle
   sendCurrentNumberPage = new Subject<number>();
@@ -104,5 +109,19 @@ export class AlbumService {
    */
   currentPage(numberPage: number) {
     return this.sendCurrentNumberPage.next(numberPage);
+  }
+
+  /**
+   * Méthode mettant le status d'un album à "on"
+   */
+  switchOn(album: Album) {
+    album.status = "on";
+    this.subjectAlbum.next(album);
+  }
+  /**
+   * Méthode mettant le status d'un album à "off"
+   */
+  switchOff(album: Album) {
+    album.status = "off";
   }
 }
