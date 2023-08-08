@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
 import { Album, List } from '../album';
 import { AlbumService } from '../album.service';
 import { fadeInAnimation } from '../animation.module';
+import { ALBUMS } from '../mock-albums';
 
 @Component({
   selector: 'app-album-details',
@@ -16,7 +17,8 @@ export class AlbumDetailsComponent implements OnInit, OnChanges {
   @Output() onHide: EventEmitter<Album> = new EventEmitter();
 
   albumLists: List[] = [];
-  songs: string[] | undefined = []; // tableau qui stock la liste des chansons de l'album
+  /** tableau qui stock la liste des chansons de l'album */
+  songs: string[] | undefined = [];
 
   constructor(
     private albumService: AlbumService
@@ -28,7 +30,9 @@ export class AlbumDetailsComponent implements OnInit, OnChanges {
   // quand il y a du nouveau
   ngOnChanges(): void {
     if (this.album) {
-      this.songs = this.albumService.getAlbumList(this.album.id);
+      this.albumService.getAlbumList(this.album.id).subscribe(
+        (albumList) => { this.songs = albumList.list }
+      );
     }
 
   }
@@ -36,6 +40,7 @@ export class AlbumDetailsComponent implements OnInit, OnChanges {
   play(songs: Album) {
     // emettre un album vers le parent
     this.onPlay.emit(songs);
+    this.albumService.switchOn(songs);
   }
 
   shuffleAlbum(songs: string[]) {

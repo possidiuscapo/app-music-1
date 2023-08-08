@@ -11,25 +11,25 @@ import { fadeInAnimation } from "../animation.module";
 })
 export class AlbumsComponent implements OnInit {
   titlePage: string = "Page princiaple Albums Music";
-  albums: Album[] = [];
+  albums!: Album[];
   selectedAlbum: Album| undefined; // je suis sur qu'une valeur sera passé au moment opportun
   status: string | null = null;
 
   constructor(
     private albumService: AlbumService
-  ) {
-    console.log(`${this.albumService.count()} albums trouvés`);
-  }
+  ) {}
 
   ngOnInit(): void {
-    this.albums = this.albumService.paginate(0, this.albumService.paginateNumberPage());
-              // .order((a: Album, b: Album) => a.duration - b.duration) // ordonne les albums
-              // .limit(0, this.albumService.paginateNumberPage()) // renvoyer une sous-partie
-              // .getAlbums(); // recupère les albums
+    this.albumService
+    .paginate(0, this.albumService.paginateNumberPage())
+    .subscribe({
+      next: (alb: Album[]) => {
+        this.albums = alb
+      }
+    });
   }
 
   onSelect(album: Album) {
-    // console.log(album);
     this.selectedAlbum = album;
   }
 
@@ -49,6 +49,9 @@ export class AlbumsComponent implements OnInit {
 
   onSetPaginate($event: {start: number, end: number}) {
     // Récupérer les albums compris entre [start et end]
-    this.albums = this.albumService.paginate($event.start, $event.end);
+    this.albumService.paginate($event.start, $event.end)
+      .subscribe({
+        next: (alb: Album[]) => this.albums = alb
+      });
   }
 }

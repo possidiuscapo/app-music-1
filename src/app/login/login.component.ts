@@ -10,6 +10,5 @@ import { fadeInAnimation } from '../animation.module';
 })
 export class LoginComponent {
   onSubmit(form: NgForm) {
-    console.log(form);
   }
 }

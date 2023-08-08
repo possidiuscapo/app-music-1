@@ -10,7 +10,7 @@
       <h1>{{ titlePage }}</h1>
       <!-- Pagination ng-template [for] -->
       <app-paginate (setPaginate)="onSetPaginate($event)"></app-paginate>
-      <ng-container *ngIf="albums.length; else notfound">
+      <ng-container *ngIf="albums; else notfound">
         <div class="card" *ngFor="let album of albums; let i = index;">
           <div class="card-header">
             {{ i + 1 }} Pop <span *ngIf="status === album.id">[play]</span>

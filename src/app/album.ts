@@ -15,7 +15,7 @@ export class Album {
 
 export interface List {
   id: string,
-  list: Array<string> // string[]
+  list: string[] // string[]
 };
 
 export interface SortAlbumCallback {

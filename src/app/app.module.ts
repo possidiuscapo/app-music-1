@@ -15,6 +15,8 @@ import { LoginComponent } from './login/login.component';
 import { AlbumDescriptionComponent } from './album-description/album-description.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { PaginateComponent } from './paginate/paginate.component';
+import { AudioPlayerComponent } from './audio-player/audio-player.component';
+import { HttpClientModule } from '@angular/common/http';
 
 /**
  * L'ensemble des routes de notre application
@@ -38,7 +40,8 @@ const albumsRoutes: Routes = [
     LoginComponent,
     AlbumDescriptionComponent,
     PageNotFoundComponent,
-    PaginateComponent
+    PaginateComponent,
+    AudioPlayerComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ const albumsRoutes: Routes = [
      * forRoot: méthode utilisée pour définir les routes à utilisés dans le module de routage.
      */
     RouterModule.forRoot(albumsRoutes),
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
