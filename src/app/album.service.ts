@@ -78,7 +78,7 @@ export class AlbumService {
   paginate(start: number, end: number): Observable<Album[]> {
     return this.http.get<Album[]>(this._albumsUrl).pipe(
       map(
-        (albums) => albums.sort(
+        (albums: any[]) => albums.sort(
           (a, b) => b.duration - a.duration
         ).slice(start, end)
       )

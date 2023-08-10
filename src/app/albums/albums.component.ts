@@ -33,7 +33,7 @@ export class AlbumsComponent implements OnInit {
     this.selectedAlbum = album;
   }
 
-  playParent($event: Album) {
+  playParent($event: any) {
     this.status = $event.id;
   }
 
