@@ -17,6 +17,10 @@ import { PaginateComponent } from './paginate/paginate.component';
 import { AudioPlayerComponent } from './audio-player/audio-player.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminModule } from './admin/admin.module';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideDatabase,getDatabase } from '@angular/fire/database';
+import { ShareModule } from './share/share.module';
 
 
 @NgModule({
@@ -28,17 +32,20 @@ import { AdminModule } from './admin/admin.module';
     LoginComponent,
     AlbumDescriptionComponent,
     PageNotFoundComponent,
-    PaginateComponent,
+    // PaginateComponent,
     AudioPlayerComponent
   ],
   imports: [
     BrowserModule,
+    AdminModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AdminModule,
+    ShareModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideDatabase(() => getDatabase()),
   ],
   providers: [],
   bootstrap: [AppComponent]
