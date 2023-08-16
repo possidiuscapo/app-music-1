@@ -12,11 +12,11 @@ import { ALBUMS } from '../mock-albums';
 })
 // à chaque "hook" son interface
 export class AlbumDetailsComponent implements OnInit, OnChanges {
-  @Input() album: Album | undefined; // propriété liée qui sera passée par le parent
+  @Input() album!: Album | undefined; // propriété liée qui sera passée par le parent
   @Output() onPlay: EventEmitter<Album> = new EventEmitter();
   @Output() onHide: EventEmitter<Album> = new EventEmitter();
 
-  albumLists: List[] = [];
+  albumLists!: List[] ;
   /** tableau qui stock la liste des chansons de l'album */
   songs: string[] | undefined = [];
 
